@@ -1,0 +1,115 @@
+var o1 = {};
+
+var o2 = {
+count: 0,
+name: 'Barbara Liskov',
+};
+
+greeting = function() {
+return "Hi";
+};
+
+greeting();
+
+greeting.toString();
+
+o1.say_hi = greeting
+
+o1.say_hi === greeting
+
+o1.say_hi()
+
+say_hi = function(){
+return "Hi, my name is " + this.name
+};
+
+say_hi();
+
+this
+
+foo
+
+this.foo
+
+o2.say_hi = say_hi
+
+o2.say_hi()
+
+say_hi
+
+arr = [say_hi, greeting];
+
+eval("arr[0]();");
+
+arr[0].call();
+
+say_hi.call(o2);
+
+o3 = Object.create(o2);
+
+o3
+
+o3.__proto__
+
+o3.__proto__ == o2       // => true
+
+"name" in o3;               // =>true
+
+o3.hasOwnProperty("name");  // =>false
+
+o3.name;                    // =>"Barbara Liskov"
+
+o3.foo;                     // =>undefined
+
+o3.name = "Dennis Ritchie";
+
+o3.say_hi()                 // ’Hello, my name is Dennis Ritchie'
+
+o1.__proto__ = o2;
+
+o1.count // => 0
+
+o2.inc = function() {
+    this.count = this.count + 1;
+};
+
+o1.inc()
+
+o1.count   // => 1
+
+o2.count   // => 0
+
+function Person(count, name) {
+   this.count = count;
+   this.name = name;
+};
+
+Person.prototype.say_hi = function() {
+      return "Hello, my name is " + this.name;
+   };
+
+o4 = new Person(4, "Bjarne Stroustrup");
+o5 = new Person(10, "Grace Hopper");
+
+o4.say_hi()
+o5.say_hi()
+
+
+
+function object() {}
+
+object.clone = function(obj) {
+    obj.__proto__ = object.prototype;
+    return obj;
+}
+
+object.prototype.clone = function() {
+    var t = {};
+    t.__proto__ = this;
+    return t;
+}
+
+
+p1 = object.clone({name: "Richard Stallman", arm_count: 2, leg_count: 2})
+p2 = p1.clone();
+p2.name = "Alan Kay";
